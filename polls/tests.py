@@ -19,10 +19,10 @@ def create_question(question_text, days):
 
 
 class QuestionMethodTests(TestCase):
-
 	
 	def test_was_published_recently_with_future_question(self):
 		time = timezone.now()+datetime.timedelta(days=30)
+		
 		#Create a question that was published in the future.
 		future_question = Question(pub_date = time)
 		self.assertEqual(future_question.was_published_recently(),False)
@@ -91,3 +91,14 @@ class QuestionViewTests(TestCase):
 
 
 		
+
+class QuestionIndexDetailTests(TestCase):
+
+    def test_detail_view_with_a_past_question(self):
+    	"""
+    	The detail view of a past question should show.
+    	"""
+    	past_question = create_question(question_text="Past q",days=-5)
+    	url = reverse('polls:detail',args=(past_question.id,))
+    	response= self.client.get(url)
+    	self.assertContains(response,past_question)

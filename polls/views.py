@@ -28,6 +28,14 @@ class ResultsView(generic.DetailView):
 
     model = Question
     template_name = 'polls/results.html'
+    
+    def get_queryset(self):
+        """
+        Exclude questions that don't DoesNotExist
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now())
+
+        
 
 
 def vote(request, question_id):
