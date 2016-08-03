@@ -3,6 +3,10 @@ li a {
 	color:blue;
 }
 
+h {
+	color:green;
+	font-size:25px;
+}
 body {
 	background: white url("images/profilepic.jpg") no-repeat left bottom;
 }
@@ -16,5 +20,5 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-    
+
 }
